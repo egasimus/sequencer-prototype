@@ -12,8 +12,6 @@ class {
       axisY: d3.scaleLinear().domain([127, 0]).range(['0%', '100%']),
     }
 
-    console.log(this.state.notes)
-
   }
 
   getPosition ({ x, y, playhead }) {
@@ -41,7 +39,7 @@ class {
   }
 
   noteLines () {
-    return [...Array(11)].map((_,i)=>i*12)
+    return [...Array(128)].map((_,i)=>i)
   }
 
   noteLine (i) {
@@ -50,7 +48,7 @@ class {
       x2: this.state.axisX(1),
       y1: this.state.axisY(i),
       y2: this.state.axisY(i),
-      stroke: '#555'
+      stroke: (i % 12) ? '#080808' : '#333'
     }
   }
 
@@ -62,8 +60,8 @@ class {
       stroke: 'white',
       x: x,
       y: y,
-      width: '1%',
-      height: '1%'
+      width: this.state.axisX(1/32),
+      height: this.state.axisY(126)
     }
   }
 
