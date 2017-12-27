@@ -3,31 +3,36 @@ static const X_FACTOR = 25
 static const Y_FACTOR = 33.3
 
 class {
+
   onCreate () {
+
     this.state = {
       notes: require('../data/drums.js'),
-      axisX: d3.scaleLinear().domain([0,   1]).range(['0%', '100%']),
+      axisX: d3.scaleLinear().domain([0,   1]).range(['0%', '25%']),
       axisY: d3.scaleLinear().domain([127, 0]).range(['0%', '100%']),
     }
+
+    console.log(this.state.notes)
+
   }
 
   getPosition ({ x, y, playhead }) {
     return {
       x: X_FACTOR * (x - playhead) + '%',
-      y: Y_FACTOR * y + '%'
+      y: 0 //Y_FACTOR * y + '%'
     }
   }
 
   getSize () {}
 
   gridLines () {
-    return [...Array(5)].map((_, i)=>i/4)
+    return [...Array(3)].map((_, i)=>(i+1)/4)
   }
 
   gridLine (i) {
-    const x = i * 100 + '%'
+    const x = this.state.axisX(i)
     return {
-      stroke: (i === 0) ? '#333' : '#111',
+      stroke: (i === 0) ? '#333' : '#222',
       x1: x,
       x2: x,
       y1: '0%',
@@ -35,22 +40,51 @@ class {
     }
   }
 
+  noteLines () {
+    return [...Array(11)].map((_,i)=>i*12)
+  }
+
+  noteLine (i) {
+    return {
+      x1: this.state.axisX(0),
+      x2: this.state.axisX(1),
+      y1: this.state.axisY(i),
+      y2: this.state.axisY(i),
+      stroke: '#555'
+    }
+  }
+
+  note ([t, i]) {
+    const x = this.state.axisX(t)
+    const y = this.state.axisY(i)
+    return {
+      fill: 'black',
+      stroke: 'white',
+      x: x,
+      y: y,
+      width: '1%',
+      height: '1%'
+    }
+  }
+
+  background ({ x }) {
+    return {
+      x: this.state.axisX(0),
+      y: this.state.axisY(127),
+      width: this.state.axisX(1),
+      height: this.state.axisY(0),
+      stroke: (x === 2) ? '#ff0' : '#ddd',
+      'stroke-width': (x === 2) ? '2' : '1',
+      fill: 'transparent'
+    }
+  }
+
 }
 
 svg.Bar ${component.getPosition(input)}
-  g.BarContents transform="scale(0.25 0.25)"
-    rect x="0%" y="0%" width="100%" height="100%" stroke="#333"
-    g.TimeGrid
-      line.TimeGridLine for (i in component.gridLines()) ${component.gridLine(i)}
+  g.BarContents
+    line.TimeGridLine for (i in component.gridLines()) ${component.gridLine(i)}
+    line.NoteGridLine for (i in component.noteLines()) ${component.noteLine(i)}
+    rect ${component.background(input)}
     g.Section
-      rect x="0%"    y="15%" width="5%" height="1%" fill="red"
-      rect x="12.5%" y="15%" width="5%" height="1%" fill="red"
-      rect x="25%"   y="15%" width="5%" height="1%" fill="red"
-      rect x="37.5%" y="15%" width="5%" height="1%" fill="red"
-    g.Section
-      circle cx="0%"    cy="25%" r="5px" fill="green"
-      circle cx="12.5%" cy="25%" r="5px" fill="green"
-      circle cx="25%"   cy="25%" r="5px" fill="green"
-      circle cx="37.5%" cy="25%" r="5px" fill="green"
-    g.Section
-      path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="blue" fill="transparent"
+      rect.Note for (i in state.notes) ${component.note(i)}
