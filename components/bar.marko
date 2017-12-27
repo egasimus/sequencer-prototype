@@ -1,0 +1,30 @@
+svg.Bar x=input.x y=input.y
+  rect x="0%" y="0%" width="25%" height="25%" fill="#040404" stroke="#222"
+  g.BarContents transform="scale(0.25 0.25)"
+    g.TimeGrid
+      line.GridX stroke="#222" x1="0%"   y1="0%" x2="0%"   y2="100%"
+      line.GridX stroke="#111" x1="25%"  y1="0%" x2="25%"  y2="100%"
+      line.GridX stroke="#111" x1="50%"  y1="0%" x2="50%"  y2="100%"
+      line.GridX stroke="#111" x1="75%"  y1="0%" x2="75%"  y2="100%"
+    g.Section
+      rect x="0%"    y="15%" width="5%" height="1%" fill="red"
+      rect x="12.5%" y="15%" width="5%" height="1%" fill="red"
+      rect x="25%"   y="15%" width="5%" height="1%" fill="red"
+      rect x="37.5%" y="15%" width="5%" height="1%" fill="red"
+    g.Section
+      circle cx="0%"    cy="25%" r="5px" fill="green"
+      circle cx="12.5%" cy="25%" r="5px" fill="green"
+      circle cx="25%"   cy="25%" r="5px" fill="green"
+      circle cx="37.5%" cy="25%" r="5px" fill="green"
+    g.Section
+      path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="blue" fill="transparent"
+
+static const d3 = require('d3')
+
+class {
+  onCreate () {
+    this.state = {
+      notes: require('../data/drums.js')
+    }
+  }
+}
