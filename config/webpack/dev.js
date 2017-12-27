@@ -8,7 +8,10 @@ module.exports = {
   context: ROOT(),
   entry: ROOT('index.js'),
   resolve: { extensions: [ '.js', '.marko' ] },
-  module: { loaders: [ { test: /\.marko$/, loader: 'marko-loader' } ] },
+  module: { loaders: [
+    { test: /\.marko$/, loader: 'marko-loader' },
+    { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
+  ] },
   output: { path: ROOT('dist'), filename: 'bundle.js' },
   devServer: { publicPath: '/', overlay: true },
   plugins: [ new (require('html-webpack-plugin'))() ],

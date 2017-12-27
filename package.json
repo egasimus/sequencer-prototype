@@ -5,12 +5,16 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",
+    "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "marko-loader": "^1.3.2",
+    "stylus-loader": "^3.0.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "marko": "^4.7.4"
+    "d3": "^4.12.2",
+    "marko": "^4.7.4",
+    "stylus": "^0.54.5"
   }
 }
