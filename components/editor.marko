@@ -1,0 +1,47 @@
+class {
+
+  onCreate () {
+
+    this.state = {
+      fps: 0,
+      lastFrame: 0,
+      playhead: 0,
+
+      tempo: 140,
+      beats: 4
+    }
+
+    this.animate(0)
+
+  }
+
+  animate (t) {
+
+    let since = t - this.state.lastFrame
+    let advance = this.state.tempo / 60000 / this.state.beats
+    let playhead = this.state.playhead + since * advance
+    if (playhead > 1) playhead -= 1
+
+    Object.assign(this.state, {
+      lastFrame: t,
+      fps: 1000 / since,
+      playhead
+    })
+
+    requestAnimationFrame(this.animate.bind(this))
+
+  }
+
+}
+
+.Editor
+  .Overlay
+    div -- ${Math.round(state.fps)} FPS
+    div -- ${state.playhead.toFixed(3)} T
+  svg
+    include('./bar', { x: 0, y: 1, w: 1, h: 1, playhead: state.playhead })
+    include('./bar', { x: 1, y: 1, w: 1, h: 1, playhead: state.playhead })
+    include('./bar', { x: 2, y: 1, w: 1, h: 1, playhead: state.playhead })
+    include('./bar', { x: 3, y: 1, w: 1, h: 1, playhead: state.playhead })
+    include('./bar', { x: 4, y: 1, w: 1, h: 1, playhead: state.playhead })
+    line.Playhead stroke="#ff0" x1="50%" x2="50%" y1="0%" y2="100%"

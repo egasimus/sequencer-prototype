@@ -3,5 +3,8 @@ document.body.innerHTML = ''
 require('./index.styl')
 
 require('./components/app')
-  .renderSync({ name: 'Krali Marko &co.' })
-  .appendTo(document.body)
+  .render({ name: 'Krali Marko &co.' })
+  .then(result => {
+    result.appendTo(document.body)
+    console.log(result.getComponent())
+  })
