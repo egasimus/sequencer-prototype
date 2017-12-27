@@ -4,7 +4,7 @@ static const Y_FACTOR = 33.3
 
 class {
 
-  onCreate () {
+  onCreate (input) {
 
     this.state = {
       notes: require('../data/drums.js'),
@@ -14,8 +14,9 @@ class {
 
   }
 
-  getPosition ({ x, y, playhead }) {
+  getAttributes ({ x, y, playhead }) {
     return {
+      opacity: (x > 2) ? 0.6: 1,
       x: X_FACTOR * (x - playhead) + '%',
       y: 0 //Y_FACTOR * y + '%'
     }
@@ -79,7 +80,7 @@ class {
 
 }
 
-svg.Bar ${component.getPosition(input)}
+svg.Bar ${component.getAttributes(input)}
   g.BarContents
     line.TimeGridLine for (i in component.gridLines()) ${component.gridLine(i)}
     line.NoteGridLine for (i in component.noteLines()) ${component.noteLine(i)}
