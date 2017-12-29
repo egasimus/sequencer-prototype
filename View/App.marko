@@ -7,5 +7,5 @@ class {
 
 .App
   include('./Editor',  state)
-  include('./Piano',   state)
+  include('./Piano',   state) if(state.showPiano)
   include('./Toolbar', state)

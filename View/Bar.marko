@@ -50,6 +50,16 @@ class {
     }
   }
 
+  marker (m) {
+    return {
+      x1: this.state.axisX(m),
+      x2: this.state.axisX(m),
+      y1: '0%',
+      y2: '100%',
+      stroke: 'red'
+    }
+  }
+
   note ([t, i]) {
     const x = this.state.axisX(t)
     const y = this.state.axisY(i)
@@ -81,6 +91,7 @@ svg.Bar ${component.getAttributes(input)}
   g.BarContents
     line.TimeGridLine for (i in component.gridLines()) ${component.gridLine(i)}
     line.NoteGridLine for (i in component.noteLines()) ${component.noteLine(i)}
+    line.Marker for (m in input.markers) ${component.marker(m)}
     rect ${component.background(input)}
     g.Section
       rect.Note for (i in input.notes) ${component.note(i)}

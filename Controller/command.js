@@ -31,5 +31,18 @@ define('Add Marker', () => {
   model.markers.push(model.playhead)
 })
 
-define('Append')  
-define('Overdub')
+define('Append', () => {
+  execute('Show Piano')
+})
+
+define('Overdub', () => {
+  execute('Show Piano')
+})
+
+define('Show Piano', () => {
+  model.showPiano = true
+})
+
+define('Hide Piano', () => {
+  model.showPiano = false
+})

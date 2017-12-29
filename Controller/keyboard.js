@@ -14,6 +14,7 @@ mapKey('r', 'Redo')
 mapKey('m', 'Add Marker')
 mapKey('a', 'Append')
 mapKey('o', 'Overdub')
+mapKey('Escape', 'Hide Piano')
 
 function mapKey (key, command) {
   module.exports.mappings.push([key, command])
@@ -21,9 +22,8 @@ function mapKey (key, command) {
 }
 
 function dispatch (event) {
-  const key = event.key.toLowerCase()
   module.exports.mappings.some(([mapping, command]) => {
-    if (mapping === key) {
+    if (mapping === event.key) {
       console.debug(mapping, command)
       require('./command').execute(command, event)
       return true
