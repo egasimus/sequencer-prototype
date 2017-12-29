@@ -1,0 +1,23 @@
+class {
+
+  onCreate ({ model }) {
+    model.observe(this)
+  }
+
+  bars (n) {
+    return [...Array(n)].map((_, i)=>i) 
+  }
+
+  bar (i) {
+    return { x: i, y: 1, w: 1, h: 1, playhead: this.input.model.playhead }
+  }
+
+}
+
+.Editor
+  .Overlay
+    div -- ${Math.round(input.model.fps)} FPS
+    div -- ${input.model.playhead.toFixed(3)} T
+  svg
+    include('./bar') for (i in component.bars(5)) ${component.bar(i)}
+    line.Playhead stroke="#ff0" x1="50%" x2="50%" y1="0%" y2="100%"

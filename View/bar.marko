@@ -5,13 +5,11 @@ static const Y_FACTOR = 33.3
 class {
 
   onCreate (input) {
-
     this.state = {
-      notes: require('../data/drums.js'),
+      notes: [],
       axisX: d3.scaleLinear().domain([0,   1]).range(['0%', '25%']),
       axisY: d3.scaleLinear().domain([127, 0]).range(['0%', '100%']),
     }
-
   }
 
   getAttributes ({ x, y, playhead }) {

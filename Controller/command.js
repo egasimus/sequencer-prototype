@@ -8,7 +8,7 @@ function defineCommand (name, callback) {
   return module.exports
 }
 
-const model = require('../model')
+const model = require('../Model')
 
 defineCommand('Toggle Play')
 defineCommand('Toggle Loop')

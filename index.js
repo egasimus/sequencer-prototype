@@ -1,3 +1,2 @@
-document.body.innerHTML = ''
-require('./controller')(require('./model'))
-require('./view')(document.body)
+require('./Controller')(require('./Model'))
+require('./View')(document.body, require('./Model'))
