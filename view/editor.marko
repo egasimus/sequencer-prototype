@@ -19,8 +19,7 @@ class {
 
     let since = t - this.state.lastFrame
     let advance = this.state.tempo / 60000 / this.state.beats
-    let playhead = this.state.playhead + since * advance
-    if (playhead > 1) playhead -= 1
+    let playhead = (this.state.playhead + since * advance) % 1
 
     Object.assign(this.state, {
       lastFrame: t,
