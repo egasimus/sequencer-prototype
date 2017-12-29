@@ -7,7 +7,7 @@ module.exports = {
   tempo: 140,
   beats: 4,
 
-  playing: true,
+  playing: false,
   playhead: 0,
   looping: true,
   markers: [],

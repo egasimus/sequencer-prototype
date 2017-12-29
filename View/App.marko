@@ -1,7 +1,11 @@
 class {
   onCreate ({ model }) {
     this.state = require('../Model/initial')
-    model.observe(this)
+    model.observe(this, this.setState.bind(this))
+  }
+
+  onDestroy () {
+    this.input.model.stopObserving(this)
   }
 }
 
