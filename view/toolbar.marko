@@ -1,9 +1,26 @@
+class {
+  onCreate () {
+    this.state = {
+      playing: true,
+      looping: true,
+      markers: 0
+    }
+    const keyboard = require('../controller/keyboard')
+    const commands = keyboard.commands
+    const emitter = this.subscribeTo(keyboard.emitter)
+  }
+}
+
 .Toolbar
-  button -- <strong>P</strong>AUSE
+  button
+   if(state.playing)
+      -- <strong>P</strong>AUSE
+   else
+      -- <strong>P</strong>LAY
   button -- <strong>L</strong>OOP
   button -- <strong>U</strong>NDO
   button -- <strong>R</strong>EDO
   .Spacer
-  button -- <strong>M</strong>ARK (0)
+  button -- <strong>M</strong>ARK (${state.markers})
   button -- <strong>A</strong>PPEND
   button -- <strong>O</strong>VERDUB
