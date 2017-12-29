@@ -13,6 +13,10 @@ module.exports = {
     { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
   ] },
   output: { path: ROOT('Build', 'dist'), filename: 'bundle.js' },
-  devServer: { publicPath: '/', overlay: true },
+  devServer: {
+    publicPath: '/',
+    contentBase: ROOT('Data')
+    overlay: true,
+  },
   plugins: [ new (require('html-webpack-plugin'))() ],
 }

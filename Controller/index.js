@@ -1,6 +1,7 @@
 module.exports = function controller (Model) {
-  const Command = require('./command')(Model)
+  const Tone = require('./tone')(Model)
+  const Command = require('./command')(Model, Tone)
   const Time = require('./frame')(Model).start()
   const Keyboard = require('./keyboard')(Model, Command)
-  return { Command, Time, Keyboard }
+  return { Tone, Command, Time, Keyboard }
 }

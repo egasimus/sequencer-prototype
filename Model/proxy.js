@@ -16,7 +16,7 @@ module.exports = function model (initial) {
 
   function set (target, property, value, receiver) {
     target[property] = value
-    observers.forEach(observer => observer(target))
+    observers.forEach(observer => observer(target, property, value))
     return true
   }
 
