@@ -6,7 +6,6 @@ class {
 
   onCreate (input) {
     this.state = {
-      notes: [],
       axisX: d3.scaleLinear().domain([0,   1]).range(['0%', '25%']),
       axisY: d3.scaleLinear().domain([127, 0]).range(['0%', '100%']),
     }
@@ -84,4 +83,4 @@ svg.Bar ${component.getAttributes(input)}
     line.NoteGridLine for (i in component.noteLines()) ${component.noteLine(i)}
     rect ${component.background(input)}
     g.Section
-      rect.Note for (i in state.notes) ${component.note(i)}
+      rect.Note for (i in input.notes) ${component.note(i)}
