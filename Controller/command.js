@@ -46,3 +46,12 @@ define('Show Piano', () => {
 define('Hide Piano', () => {
   model.showPiano = false
 })
+
+define('Set Keyboard Mode', (event, mode) => {
+  model.keyboardMode = mode
+  if (mode === 'Piano') {
+    execute('Show Piano')
+  } else {
+    execute('Hide Piano')
+  }
+})
