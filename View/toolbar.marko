@@ -1,20 +1,14 @@
-class {
-  onCreate ({ model }) {
-    model.observe(this)
-  }
-}
-
 .Toolbar
-  button class=(input.model.playing && "active")
-    if(input.model.playing)
+  button class=(input.playing && "active")
+    if(input.playing)
       -- <strong>P</strong>AUSE
     else
       -- <strong>P</strong>LAY
-  button class=(input.model.looping && "active")
+  button class=(input.looping && "active")
     -- <strong>L</strong>OOP
   button -- <strong>U</strong>NDO
   button -- <strong>R</strong>EDO
   .Spacer
-  button -- <strong>M</strong>ARK (${input.model.markers.length})
+  button -- <strong>M</strong>ARK (${input.markers.length})
   button -- <strong>A</strong>PPEND
   button -- <strong>O</strong>VERDUB

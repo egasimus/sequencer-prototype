@@ -4,7 +4,7 @@ module.exports = function model (initial) {
 
   const data = Object.assign({}, initial)
 
-  return new Proxy(initial, { get, set })
+  return new Proxy(data, { get, set })
 
   function get (target, property, receiver) {
     if (property === 'observe') return observe
@@ -13,10 +13,11 @@ module.exports = function model (initial) {
 
   function observe (component) {
     component.on('mount', () =>
-      observers.set(component,
-        () => component.forceUpdate()))
-    component.on('destroy', () =>
-      observers.delete(component))
+      observers.set(component, () => {
+        if (!component.state) component.state = {}
+        component.setState(data)
+      }))
+    component.on('destroy', () => observers.delete(component))
   }
 
   function set (target, property, value, receiver) {

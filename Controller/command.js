@@ -1,29 +1,35 @@
 module.exports = {
   commands: {},
-  defineCommand
+  define,
+  execute
 }
 
-function defineCommand (name, callback) {
+function define (name, callback) {
   module.exports.commands[name] = callback
   return module.exports
 }
 
+function execute(command, ...args) {
+  return module.exports.commands[command] &&
+    module.exports.commands[command](...args)
+}
+
 const model = require('../Model')
 
-defineCommand('Toggle Play', () => {
+define('Toggle Play', () => {
   model.playing = !model.playing
 })
 
-defineCommand('Toggle Loop', () => {
+define('Toggle Loop', () => {
   model.looping = !model.looping
 })
 
-defineCommand('Undo') 
-defineCommand('Redo')
+define('Undo') 
+define('Redo')
 
-defineCommand('Add Marker', () => {
+define('Add Marker', () => {
   model.markers.push(model.playhead)
 })
 
-defineCommand('Append')  
-defineCommand('Overdub')
+define('Append')  
+define('Overdub')

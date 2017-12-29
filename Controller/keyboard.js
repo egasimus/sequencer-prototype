@@ -1,13 +1,11 @@
-const { commands } = require('./command')
-
-window.addEventListener('keydown', dispatch)
-
 module.exports = {
   emitter: new (require('eventemitter3'))(),
   mappings: [],
   mapKey,
   dispatch
 }
+
+window.addEventListener('keydown', dispatch)
 
 mapKey('p', 'Toggle Play')
 mapKey('l', 'Toggle Loop')
@@ -27,7 +25,7 @@ function dispatch (event) {
   module.exports.mappings.some(([mapping, command]) => {
     if (mapping === key) {
       console.debug(mapping, command)
-      commands[command] && commands[command](event)
+      require('./command').execute(command, event)
       return true
     }
   })
