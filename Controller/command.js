@@ -14,9 +14,16 @@ defineCommand('Toggle Play', () => {
   model.playing = !model.playing
 })
 
-defineCommand('Toggle Loop')
+defineCommand('Toggle Loop', () => {
+  model.looping = !model.looping
+})
+
 defineCommand('Undo') 
-defineCommand('Redo')       
-defineCommand('Add Marker')
+defineCommand('Redo')
+
+defineCommand('Add Marker', () => {
+  model.markers.push(model.playhead)
+})
+
 defineCommand('Append')  
 defineCommand('Overdub')

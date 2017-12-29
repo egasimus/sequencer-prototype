@@ -1,3 +1,9 @@
+class {
+  onCreate ({ model }) {
+    model.observe(this)
+  }
+}
+
 .App
   include('./editor', input)
   include('./piano', input)
