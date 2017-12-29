@@ -17,11 +17,15 @@ module.exports = (Model) => {
     playSample,
     Model.notes.map(convert)
   ).start(0)
+  loop.loop = true
+
+  const transport = Tone.Transport
+  transport.bpm.value = Model.tempo
 
   const Engine = {
     drums,
     loop,
-    transport: Tone.Transport,
+    transport,
     playSample
   }
 
@@ -42,7 +46,11 @@ module.exports = (Model) => {
   }
 
   function convert (event) {
-    return [event[0] * Model.beats * Tone.Transport.PPQ + 'i', event[1]]
+    return [toPPQ(event[0]), event[1]]
+  }
+
+  function toPPQ (bar) {
+    return bar * Model.beats * Tone.Transport.PPQ + 'i'
   }
 
 }
