@@ -6,6 +6,7 @@ class {
 }
 
 .App
+  include('./Overlay', state)
   include('./Editor',  state)
   include('./Piano',   state) if(state.showPiano)
   include('./Toolbar', state)

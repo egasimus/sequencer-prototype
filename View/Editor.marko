@@ -17,9 +17,6 @@ class {
 }
 
 .Editor
-  .Overlay
-    div -- ${Math.round(input.fps)} FPS
-    div -- ${input.playhead.toFixed(3)} T
   svg
     include('./Bar') for (i in component.bars(5)) ${component.bar(i)}
     line.Playhead stroke="#ff0" x1="50%" x2="50%" y1="0%" y2="100%"

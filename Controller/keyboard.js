@@ -1,30 +1,45 @@
-module.exports = {
+const Keyboard = module.exports = {
   emitter: new (require('eventemitter3'))(),
-  mappings: [],
-  mapKey,
+  modes: {},
+  mode,
   dispatch
 }
 
 window.addEventListener('keydown', dispatch)
 
-mapKey('p', 'Toggle Play')
-mapKey('l', 'Toggle Loop')
-mapKey('u', 'Undo')
-mapKey('r', 'Redo')
-mapKey('m', 'Add Marker')
-mapKey('a', 'Append')
-mapKey('o', 'Overdub')
-mapKey('Escape', 'Hide Piano')
+const DEFAULT_MODE = 'navigation'
+const model = require('../Model')
+model.inputMode = DEFAULT_MODE
 
-function mapKey (key, command) {
-  module.exports.mappings.push([key, command])
-  return module.exports
+Keyboard.mode(DEFAULT_MODE)
+  .key('p', 'Toggle Play')
+  .key('l', 'Toggle Loop')
+  .key('u', 'Undo')
+  .key('r', 'Redo')
+  .key('m', 'Add Marker')
+  .key('a', 'Append')
+  .key('o', 'Overdub')
+  .key('Escape', 'Hide Piano')
+
+function mode (name) {
+  Keyboard.modes[name] = Keyboard.modes[name] || []
+  const mode = {
+    key (code, command) {
+      Keyboard.modes[name].push([code, command])
+      return mode
+    }
+  }
+  return mode
 }
 
 function dispatch (event) {
-  module.exports.mappings.some(([mapping, command]) => {
+  const currentMode = Keyboard.modes[model.inputMode]
+  if (!currentMode) return
+
+  currentMode.some(([mapping, command]) => {
     if (mapping === event.key) {
       console.debug(mapping, command)
+      require('../')
       require('./command').execute(command, event)
       return true
     }
