@@ -10,7 +10,10 @@ function defineCommand (name, callback) {
 
 const model = require('../Model')
 
-defineCommand('Toggle Play')
+defineCommand('Toggle Play', () => {
+  model.playing = !model.playing
+})
+
 defineCommand('Toggle Loop')
 defineCommand('Undo') 
 defineCommand('Redo')       

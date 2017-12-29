@@ -26,8 +26,8 @@ function dispatch (event) {
   const key = event.key.toLowerCase()
   module.exports.mappings.some(([mapping, command]) => {
     if (mapping === key) {
-      console.log(mapping, command)
-      module.exports.emitter.emit(command, event)
+      console.log(mapping, command, commands[command])
+      commands[command](event)
       return true
     }
   })
