@@ -29,8 +29,6 @@ module.exports = (Model) => {
     playSample
   }
 
-  debugger
-
   return Engine
 
   function modelUpdated (data, key, value) {
