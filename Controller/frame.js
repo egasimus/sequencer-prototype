@@ -1,7 +1,7 @@
 const SECOND = 1000
 const MINUTE = 60000
 
-module.exports = (model) => {
+module.exports = (Model) => {
 
   let id
 
@@ -21,11 +21,11 @@ module.exports = (model) => {
 
   function tick (t) {
 
-    let since = t - model.lastFrame
-    let advance = model.playing ? (model.tempo / MINUTE / model.beats) : 0
-    let playhead = (model.playhead + since * advance) % 1
+    let since = t - Model.lastFrame
+    let advance = Model.playing ? (Model.tempo / MINUTE / Model.beats) : 0
+    let playhead = (Model.playhead + since * advance) % 1
 
-    Object.assign(model, {
+    Object.assign(Model, {
       lastFrame: t,
       fps: SECOND / since,
       playhead
