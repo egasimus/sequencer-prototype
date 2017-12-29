@@ -1,6 +1,6 @@
 module.exports = function (host, model) {
   require('../Theme/index.styl')
-  require('./app')
+  require('./App')
     .render({ model })
     .then(result => {
       host.innerHTML = ''
