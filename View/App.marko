@@ -10,7 +10,8 @@ class {
 }
 
 .App
-  include('./Overlay', state)
-  include('./Editor',  state)
-  include('./Piano',   state) if(state.showPiano)
-  include('./Toolbar', state)
+  include('./Overlay',  state)
+  include('./Editor',   state)
+  include('./Timeline', state)
+  include('./Piano',    state) if(state.showPiano)
+  include('./Toolbar',  state)

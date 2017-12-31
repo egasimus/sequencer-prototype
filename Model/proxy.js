@@ -21,3 +21,24 @@ module.exports = function model (initial) {
   }
 
 }
+
+// TODO
+//if (false) {V
+  //get (target, property) {
+    //if (property === 'observe') {
+      //return (cb) => {
+        //let key = Symbol()
+        //observers.set(key, cb)
+        //return () => {
+          //observers.delete(key)
+        //}
+      //}
+    //} else return target[property]
+  //}
+
+  //component {
+    //onCreate({ model }) {
+      //this.on('destroy', model.observe(this.setState.bind(this)))
+    //}
+  //}
+//}

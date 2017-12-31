@@ -6,11 +6,7 @@ module.exports = (Model) => {
   const Tone = require('tone')
 
   const drums = new Tone.Players({
-    35: '/Data/Bass-Drum-1.wav',
-    40: '/Data/Ensoniq-ESQ-1-Snare.wav',
-    44: '/Data/Ensoniq-SQ-1-Closed-Hi-Hat.wav',
-    46: '/Data/Ensoniq-SQ-1-Open-Hi-Hat.wav',
-    49: '/Data/Crash-Cymbal-1.wav'
+    35: '/absolutely-insane-kikdrum.wav',
   }).toMaster()
 
   const loop = new Tone.Part(

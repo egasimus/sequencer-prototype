@@ -1,0 +1,13 @@
+- Sample: Kick
+  Source: ./absolutely-insane-kikdrum.wav
+
+- Instrument: Drums
+  35: Kick
+
+- Track: Kick
+  Sequence: Kick
+  Instrument: Drums
+  Kick:
+    Sequence
+
+

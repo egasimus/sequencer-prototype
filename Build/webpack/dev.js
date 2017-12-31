@@ -15,7 +15,7 @@ module.exports = {
   output: { path: ROOT('Build', 'dist'), filename: 'bundle.js' },
   devServer: {
     publicPath: '/',
-    contentBase: ROOT('Data')
+    contentBase: ROOT('Data'),
     overlay: true,
   },
   plugins: [ new (require('html-webpack-plugin'))() ],

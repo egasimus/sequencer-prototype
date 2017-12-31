@@ -1,0 +1,10 @@
+.Node
+  strong -- ${input.key}
+  em -- &nbsp;${typeof input.value}
+  .Spacer
+  if(typeof input.value === 'object')
+    for(key in Object.keys(input.value))
+      -- - ${key}: ${input.value[key]}
+      br
+  else
+    -- ${input.value} 
