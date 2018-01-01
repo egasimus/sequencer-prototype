@@ -21,12 +21,12 @@ module.exports = (Model, Audio) => {
 
   function tick (t) {
 
-    let since = t - Model.lastFrame
+    let since = t - Model.now
     //let advance = Model.playing ? (Model.tempo / MINUTE / Model.beats) : 0
     //let playhead = (Model.playhead + since * advance) % 1
 
     Object.assign(Model, {
-      lastFrame: t,
+      now: t,
       fps: SECOND / since,
       playhead: (
         Audio.transport.ticks / Audio.transport.PPQ / Audio.transport.timeSignature

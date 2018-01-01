@@ -7,7 +7,7 @@ module.exports = {
   //},
 
   fps: 0,
-  lastFrame: 0,
+  now: 0,
 
   notes: require('../Data/drums.js'),
   // TODO project: require('../Data/project.lml'),
