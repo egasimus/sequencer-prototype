@@ -1,31 +1,28 @@
-let $ = module.exports
-
-$.tempo = 140
-
-$.sample = {
-  35: './absolutely-insane-kikdrum.wav'
+let $ = module.exports = {
+  tempo: 140,
+  sample: {},
+  sequence: {},
+  track: []
 }
 
-$.sequence = {
-  beat: {
-    length: "0:1:0",
-    events: {
-      "0:0:0": [35]
-    }
-  },
-  offbeat: {
-    length: "0:1:0",
-    events: {
-      "0:0:8": [46]
-    }
+$.sample[35] = './absolutely-insane-kikdrum.wav'
+
+$.sequence['beat'] = {
+  length: "0:1:0",
+  events: {
+    "0:0:0": 35
   }
 }
 
-$.tracks = {
-  kick: {
-    sequence: [ $.sequence.beat ]
-  },
-  hat: {
-    sequence: [ $.sequence.offbeat ]
+$.sequence['offbeat'] = {
+  length: "0:1:0",
+  events: {
+    "0:0:8": 46
   }
 }
+
+$.track[0] = [ $.sequence.beat ]
+
+$.track[1] = [ $.sequence.offbeat ]
+
+$.track[2] = [ $.sequence.offbeat ]

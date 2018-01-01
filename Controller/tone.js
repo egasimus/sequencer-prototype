@@ -13,7 +13,9 @@ module.exports = (Model) => {
     playSample,
     Model.notes.map(convert)
   ).start(0)
+  loop.loopEnd = '192i'
   loop.loop = true
+  console.log(loop)
 
   const transport = Tone.Transport
   transport.bpm.value = Model.tempo

@@ -1,22 +1,48 @@
 .Editor
-  svg
-    include('./Bar') for (i in component.bars(5)) ${component.bar(i)}
+  svg.Track
+    for(trackIndex in Object.keys(input.project.track))
+      g.TrackContents ${component.track(trackIndex)}
+        for(clipIndex in Object.keys(input.project.track[trackIndex]))
+          include('./Bar', component.clip(trackIndex, clipIndex)) ${input}
     line.Playhead stroke="#ff0" x1="50%" x2="50%" y1="0%" y2="100%"
   include('./Sidebar', input)
 
+static const d3 = require('d3')
+
 class {
 
-  bars (n) {
-    return [...Array(n)].map((_, i)=>i)
+  onCreate (input) {
+    this.state = {
+      axisX: d3.scaleLinear()
+        .domain([0, 1])
+        .range(['0%', '25%']),
+      axisY: d3.scaleLinear()
+        .domain([0, (input.project.track || []).length])
+        .range(['0%', '100%']),
+    }
   }
 
-  bar (i) {
+  track (trackIndex) {
+    const track = this.input.project.track[trackIndex]
+    return {}
+  }
+
+  clip (trackIndex, clipIndex) {
+    const track = this.input.project.track[trackIndex]
+    const trackHeight = (100 / this.input.project.track.length) + '%'
+    const clip = track[clipIndex]
     return {
-      x: i, y: 1,
-      w: 1, h: 1,
-      playhead: this.input.playhead,
-      notes: this.input.notes,
-      markers: this.input.markers
+      track,
+      clip,
+      x: 25 * (2 - this.input.playhead) + '%',
+      y: this.state.axisY(trackIndex),
+      //height: this.state.axisY(1),
+      axisX: d3.scaleLinear()
+        .domain([0,   1])
+        .range(['0%', '25%']),
+      axisY: d3.scaleLinear()
+        .domain([127, 0])
+        .range(['0%', trackHeight]),
     }
   }
 

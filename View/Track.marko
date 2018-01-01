@@ -1,0 +1,21 @@
+g ${component.attributes()}
+  include('./Bar') for (i in component.bars()) ${component.bar(i)}
+
+class {
+
+  bars (n) {
+    //return [...Array(n)].map((_, i)=>i)
+    return [2]
+  }
+
+  bar (i) {
+    return {
+      x: i, y: 1,
+      w: 1, h: 1,
+      playhead: this.input.playhead,
+      notes: this.input.notes,
+      markers: this.input.markers
+    }
+  }
+
+}

@@ -4,22 +4,13 @@ static const Y_FACTOR = 33.3
 
 class {
 
-  onCreate (input) {
-    this.state = {
-      axisX: d3.scaleLinear().domain([0,   1]).range(['0%', '25%']),
-      axisY: d3.scaleLinear().domain([127, 0]).range(['0%', '100%']),
-    }
+  onCreate ({ clip, axisX, axisY }) {
+    this.state = { clip, axisX, axisY }
   }
 
-  getAttributes ({ x, y, playhead }) {
-    return {
-      opacity: (x > 2) ? 0.6: 1,
-      x: X_FACTOR * (x - playhead) + '%',
-      y: 0 //Y_FACTOR * y + '%'
-    }
+  svgAttrs () {
+    return { x: this.input.x, y: this.input.y, height: this.input.height }
   }
-
-  getSize () {}
 
   gridLines () {
     return [...Array(3)].map((_, i)=>(i+1)/4)
@@ -31,8 +22,8 @@ class {
       stroke: (i === 0) ? '#333' : '#222',
       x1: x,
       x2: x,
-      y1: '0%',
-      y2: '100%'
+      y1: this.state.axisY(127),
+      y2: this.state.axisY(0)
     }
   }
 
@@ -87,11 +78,11 @@ class {
 
 }
 
-svg.Bar ${component.getAttributes(input)}
+svg.Bar ${component.svgAttrs()}
   g.BarContents
     line.TimeGridLine for (i in component.gridLines()) ${component.gridLine(i)}
     line.NoteGridLine for (i in component.noteLines()) ${component.noteLine(i)}
     line.Marker for (m in input.markers) ${component.marker(m)}
     rect ${component.background(input)}
     g.Section
-      rect.Note for (i in input.notes) ${component.note(i)}
+      rect.Note for (i in input.clip.events) ${component.note(i)}

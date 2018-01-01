@@ -13,7 +13,7 @@ module.exports = {
   // TODO project: require('../Data/project.lml'),
   project: require('../Data/project.js'),
   tempo: 140,
-  beats: 4,
+  beats: 1,
 
   playing: false,
   playhead: 0,

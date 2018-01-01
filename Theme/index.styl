@@ -68,6 +68,18 @@ html, body, .App
 
 .Node
   display flex
-  flex-flow row wrap
-  em 
+  flex-flow column nowrap
+  em
     opacity 0.75
+  &_Head
+    display flex
+    flex-flow row nowrap
+  &_Body
+    padding-left 6px
+    margin-left 2px
+    border-left 1px dotted #333
+    padding-bottom 1px
+    margin-bottom 3px
+    border-bottom 1px dotted #333
+  .Spacer
+    border-top 1px dottepd #333
